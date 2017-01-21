@@ -1,0 +1,137 @@
+@import "components/vars";
+@import "components/fonts";
+@import "components/container";
+
+.contFluid {
+  .cf_main {
+    //background-color: #faf8ef;
+    .container {
+      //padding: 0;
+    }
+    //container
+
+    .bg_game {
+      position: absolute;
+      img {
+        opacity: .2;
+      }
+    }
+    //bg_game
+
+    .mn_header {
+      min-height: 200px;
+    }
+    //mn_header
+
+    .mn_content {
+      position: relative;
+      max-width: 495px;
+      margin: auto;
+      @include userSelect(none);
+      .gridCont {
+        border-radius: 10px;
+        background-color: #bbada0;
+        padding: 7.5px;
+        .grid_row {
+          @include clearfix;
+          .grid-cell {
+            width: 105px;
+            height: 105px;
+            margin: 7.5px;
+            float: left;
+            border-radius: 3px;
+            background: rgba(238, 228, 218, 0.35);
+          }
+          //grid-cell
+        }
+        //grid_row
+      }
+      //gridCont
+
+      .tileCont {
+        @include alignCenter;
+        z-index: 2;
+        .tile {
+          position: absolute;;
+          width: 105px;
+          height: 105px;
+          line-height: 105px;
+          transition: 100ms ease-in-out;
+          transition-property: transform;
+          display: inline-block;
+          .inner {
+            font-size: 55px;
+            font-weight: bold;
+            line-height: 105px;
+            border-radius: 3px;
+            background-color: #eee4da;
+            color: #776e65;
+            text-align: center;
+            z-index: 10;
+            display: block;
+            box-shadow: 0 0 30px 10px rgba(243, 215, 116, 0), inset 0 0 0 1px rgba(255, 255, 255, 0);
+          }
+          //inner
+
+          @include transition(transform .3s ease);
+          &.offset-1-1 {
+            @include transform(translate(15px, 15px));
+          }
+          &.offset-1-2 {
+            @include transform(translate(15px, 135px));
+          }
+          &.offset-1-3 {
+            @include transform(translate(15px, 255px));
+          }
+          &.offset-1-4 {
+            @include transform(translate(15px, 375px));
+          }
+
+          &.offset-2-1 {
+            @include transform(translate(135px, 15px));
+          }
+          &.offset-2-2 {
+            @include transform(translate(135px, 135px));
+          }
+          &.offset-2-3 {
+            @include transform(translate(135px, 255px));
+          }
+          &.offset-2-4 {
+            @include transform(translate(135px, 375px));
+          }
+
+          &.offset-3-1 {
+            @include transform(translate(255px, 15px));
+          }
+          &.offset-3-2 {
+            @include transform(translate(255px, 135px));
+          }
+          &.offset-3-3 {
+            @include transform(translate(255px, 255px));
+          }
+          &.offset-3-4 {
+            @include transform(translate(255px, 375px));
+          }
+
+          &.offset-4-1 {
+            @include transform(translate(375px, 15px));
+          }
+          &.offset-4-2 {
+            @include transform(translate(375px, 135px));
+          }
+          &.offset-4-3 {
+            @include transform(translate(375px, 255px));
+          }
+          &.offset-4-4 {
+            @include transform(translate(375px, 375px));
+          }
+        }
+        //tile
+      }
+      //tileCont
+    }
+    //mn_content
+  }
+  //cf_main
+}
+//contFluid
