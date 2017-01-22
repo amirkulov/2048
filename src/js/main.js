@@ -1,7 +1,7 @@
 // = components/jquery.geocomplete.js
 
 function getRandomInt(min, max, count) {
-  random = Math.floor(Math.random() * (max - min)) + min;
+  var random = Math.floor(Math.random() * (max - min)) + min;
 
   switch (count) {
     case 'even': (random % 2 == 0) ? random : ++random;
@@ -11,8 +11,7 @@ function getRandomInt(min, max, count) {
     default: random;
   }
 
-  return random
-  console.log(random);
+  return random;
 }
 
 function myEventHandler() {
@@ -43,46 +42,49 @@ function myEventHandler() {
   }
 
   if(mapped == 1) {
-
+      $('.tile').each(function () {
+          $(this).attr('offset');
+          
+          console.log( $(this).attr('offset'));
+      });
   }
+  
 }
 //myEventHandler
 
 $(document).ready(function () {
-  var self = this;
-  var tileCont = $('.tileCont');
-  var tile = $('.tile');
-  var randomCount;
-  var count = 2;
-  var positionTile = {};
+    var grid = $('.tileCont');
+    var tile = $('.tile');
+    var ttlTile = tile.length;
+    var position; 
+    var count = 2;
 
-  $('#startGame').on('click', function() {
 
-    document.addEventListener("keyup", myEventHandler, false);
+    $('#startGame').on('click', function () {
 
-    tileCont.empty();
-    randomCount = getRandomInt(1, 4) + '-' + getRandomInt(1, 4);
-    randomCount1 = getRandomInt(1, 4) + '-' + getRandomInt(1, 4);
-    if(randomCount == randomCount1) {
-      count = 4;
-    } else {
-      count = 2;
-    }
-    console.log(randomCount);
-    for (var i = 0; i < array.length; i++) {
-      array[i]
-      tileCont.append("<div class='tile offset-" + randomCount+ "'>"
-                        + "<span class='inner'>" + count + "</span></div>"
-                    + "<div class='tile offset-" + randomCount1+ "'>"
-                        + "<span class='inner'>" + count + "</span></div>");
-    }
+        document.addEventListener("keyup", myEventHandler, false);
 
-  });
+        tileCont.empty();
+        tileLight++;
+
+
+        for (var i = 0; i < tileLight; i++) {
+
+            ranCou = getRandomInt(1, 4) + '-' + getRandomInt(1, 4);
+
+            if (ranCou == ranCou) {
+                ranCou = getRandomInt(1, 4) + '-' + getRandomInt(1, 4);
+            }
+
+            tileCont.append("<div offset='" + ranCou + "' class='tile offset-" + ranCou + "'>"
+                + "<span class='inner'>" + count + "</span></div>");
+        }
+
+    });
 
 
 });
 //END READY
 
-(function($) {
-});
+//(function($) {});
 //END READY
