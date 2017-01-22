@@ -1,3 +1,4 @@
+
 // = components/jquery.geocomplete.js
 
 function getRandomInt(min, max, count) {
@@ -12,6 +13,39 @@ function getRandomInt(min, max, count) {
   }
 
   return random;
+}
+
+function offset(count, position) {
+
+  switch (position) {
+    case 'right-down':
+        if(count == 1) count = 3;
+        else if(count == 2) count = 2;
+        else if(count == 3) count = 1;
+        else if(count == 4) count = 0;
+      break;
+    case 'top-left':
+        if(count == 1) count = 0;
+        else if(count == 2) count = 1;
+        else if(count == 3) count = 2;
+        else if(count == 4) count = 3;
+      break;
+  }
+
+  return count;
+}
+
+function tilePosition(tilePosition) {
+  $('.tile').each(function () {
+    var attr = $(this).attr('offset');
+    var thisClass = $(this).attr('class').slice(5);
+    var positionY = attr.slice(0,1);
+    var offsetY = offset(positionY, 'right-down');
+
+    var ttlOffset = "offset-" + (parseInt(positionY) + parseInt(offsetY)) + attr.slice(1);
+    $(this).removeClass(thisClass).addClass(ttlOffset);
+    $(this).attr('offset', ttlOffset);
+  });
 }
 
 function myEventHandler() {
@@ -36,19 +70,23 @@ function myEventHandler() {
   if (!keyCode) {
     if (mapped !== undefined) {
       event.preventDefault();
+      switch (mapped) {
+        case 1:
+            tilePosition();
+          break;
+        case 2:
+            tilePosition();
+          break;
+        case 3:
+            tilePosition();
+          break;
+        case 4:
+            tilePosition();
+          break;
+      }
 
-      console.log(mapped + "  You pressed W!");
     }
   }
-
-  if(mapped == 1) {
-      $('.tile').each(function () {
-          $(this).attr('offset');
-          
-          console.log( $(this).attr('offset'));
-      });
-  }
-  
 }
 //myEventHandler
 
@@ -56,29 +94,38 @@ $(document).ready(function () {
     var grid = $('.tileCont');
     var tile = $('.tile');
     var ttlTile = tile.length;
-    var position; 
+    var position;
     var count = 2;
 
 
     $('#startGame').on('click', function () {
 
         document.addEventListener("keyup", myEventHandler, false);
+position = getRandomInt(1, 5) + '-' + getRandomInt(1, 5);
+        //grid.empty();
+        ttlTile++;
 
-        tileCont.empty();
-        tileLight++;
+        grid.append("<div offset='" + position + "' class='tile offset-" + position + "'>"
+            + "<span class='inner'>" + count + "</span></div>");
 
-
-        for (var i = 0; i < tileLight; i++) {
-
-            ranCou = getRandomInt(1, 4) + '-' + getRandomInt(1, 4);
-
-            if (ranCou == ranCou) {
-                ranCou = getRandomInt(1, 4) + '-' + getRandomInt(1, 4);
-            }
-
-            tileCont.append("<div offset='" + ranCou + "' class='tile offset-" + ranCou + "'>"
-                + "<span class='inner'>" + count + "</span></div>");
-        }
+        // if(ttlTile > 2) {
+        //   console.log(111);
+        //
+        //   for (var i = 0; i < ttlTile; i++) {
+        //
+        //       if (position == position) {
+        //           position = getRandomInt(1, 5) + '-' + getRandomInt(1, 5);
+        //       }
+        //
+        //       grid.append("<div offset='" + position + "' class='tile offset-" + position + "'>"
+        //           + "<span class='inner'>" + count + "</span></div>");
+        //   }
+        // } else {
+        //   grid.append("<div offset='" + position + "' class='tile offset-" + position + "'>"
+        //               + "<span class='inner'>" + count + "</span></div>"
+        //             + "<div offset='" + position + "' class='tile offset-" + position + "'>"
+        //               + "<span class='inner'>" + count + "</span></div>");
+        // }
 
     });
 
